@@ -1,0 +1,110 @@
+@use "sass:color";
+
+// DESTAQUES
+
+$purple: #8323FF;
+$pink: #FF2DAF;
+$yellow: #FEEA35;
+
+// BASES
+
+$dark-gray: #1E1F28;
+$normal-gray: #2B2B37;
+$medium-gray: #373745;
+$light-gray: #8B8D9B;
+$blank: #FFFFFF;
+$dark: #000000;
+
+// @MIXINS
+
+@mixin primary-btn() {
+    @include flex(center, center, row-reverse, 8px);
+    padding: 8px 16px;
+    color: $blank;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #8323FF 0%, #FF2DAF 100%);
+    &:hover {
+        background: linear-gradient(90deg, color.adjust(#8323FF, $lightness: 10%), color.adjust(#FF2DAF, $lightness: 10%));
+    }
+    i {
+        width: 32px;
+        height: 32px;
+        @include flex(center, center);
+        background: opColor($blank, 0.2);
+        border-radius: 50%;
+    }
+    &.loading{
+        cursor: not-allowed;
+        opacity: 0.3;
+        i{
+            transform: rotate(0);
+            animation: rotateI .8s linear infinite;
+        }
+    }
+    i.none {
+        display: none;
+    }
+    cursor: pointer;
+}
+
+@mixin secondary-btn() {
+    @include flex(center, center, row, 8px);
+    padding: 8px 16px;
+    color: $blank;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    background: $normal-gray;
+    border: none;
+    border-radius: 4px;
+    transition: .3s;
+    width: 100%;
+    &:hover {
+        background: $medium-gray;
+    }
+    &.loading{
+        cursor: not-allowed;
+        opacity: 0.3;
+        i{
+            transform: rotate(0);
+            animation: rotateI .8s linear infinite;
+        }
+    }
+    img {
+        width: 28px;
+        height: 28px;
+    }
+    i {
+        @include flex(center, center);
+        width: 28px;
+        height: 28px;
+    }
+    i.none {
+        display: none;
+    }
+    cursor: pointer;
+}
+
+@keyframes rotateI {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@mixin flex($just: flex-start, $align: flex-start, $direc: row, $gap: 0, $wrap: nowrap) {
+    display: flex;
+    justify-content: $just;
+    align-items: $align;
+    flex-flow: $direc $wrap;
+    gap: $gap;
+}
+
+// @FUNCTIONS
+
+@function opColor($c, $op) {
+    @return color.adjust($c, $alpha: ($op - 1));
+}

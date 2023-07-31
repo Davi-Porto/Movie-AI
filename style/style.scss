@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+@import 'variables';
+
+.flex-center {
+    @include flex(center, center);
+}
+
+.flex-center-column {
+    @include flex(center, center, column);
+}
+
+.primary-btn {
+    @include primary-btn();
+}
+
+.secondary-btn {
+    @include secondary-btn();
+}
+
+body,
+html {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(90deg, $purple, $pink);
+    background-size: 100% 100vh;
+    font-family: 'Outfit', sans-serif;
+    color: $blank;
+}
+
+main.content {
+    min-width: 262px;
+    margin: 30px;
+    background: $dark-gray;
+    border: 8px solid $purple;
+    border-radius: 16px;
+    padding: 32px 48px;
+    gap: 36px;
+    box-shadow: 0px -3px 22px 0px opColor($dark, 0.35);
+    &>.header-content {
+        @include flex(space-between, center);
+        width: 100%;
+        picture {
+            width: 85px;
+            height: 44px;
+        }
+    }
+    &>.movies-content {
+        gap: 34px;
+        &>.poster-content {
+            @include flex(center, center, column, 12px);
+            &>.movie {
+                @include flex(center, center, column, 8px);
+            }
+            &>.name-note {
+                @include flex(space-between, center);
+                width: 100%;
+                height: 40px;
+                overflow: hidden;
+                div:nth-child(1){
+                    width: 140px;
+                    overflow: hidden;
+                    color: $blank;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 100%; /* 20px */
+                }
+                div:nth-child(2){
+                    @include flex(center, center);
+                    gap: 8px;
+                    font-size: 16px;
+                    color: $yellow;
+                    font-weight: 600;
+                    i {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+            &>.movie>picture.poster > img{
+                width: 194px;
+                height: 289px;
+            }
+            & .section-info {
+                width: 100%;
+                opacity: 0.2;
+                @include flex(space-between, center);
+                div > i {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+        }
+    }
+}
+
+.none {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    body,
+    html {
+        height: auto;
+    }
+    main.content {
+        width: 95%;
+        height: 100%;
+        &>.movies-content {
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media (max-width: 520px) {
+    main.content>.header-content {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        picture {
+            width: 85px;
+            height: 44px;
+        }
+    }
+}
